@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: result-app
+  namespace: voting-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: result-app
+  template:
+    metadata:
+      labels:
+        app: result-app
+    spec:
+      containers:
+      - name: result-app
+        image: dockersamples/examplevotingapp_result:before
+        ports:
+        - containerPort: 80
+        env:
+        - name: POSTGRES_HOST
+          value: "postgres-svc" # Conecta-se ao Service do Postgres

@@ -1,0 +1,13 @@
+# pv.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ada-pv # Nome do nosso volume
+spec:
+  storageClassName: standard # DEVE ser o mesmo nome do PVC
+  capacity:
+    storage: 1Gi # DEVE ser igual ou maior que o PVC
+  accessModes:
+    - ReadWriteOnce # DEVE ser compatível com o PVC
+  hostPath:
+    path: "/mnt/data" # Diretório no nó que será usado como armazenamento

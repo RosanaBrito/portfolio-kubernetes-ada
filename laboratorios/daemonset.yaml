@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata: 
+  name: ada-daemonset
+  labels:
+    app: ada-ds 
+spec:
+  selector:
+    matchLabels:
+      app: ada-ds
+  template:
+    metadata:
+      labels:
+        app: ada-ds
+    spec:
+      containers:
+        - name: daemonset 
+          image: nginx:latest
+          ports: 
+          - containerPort: 80

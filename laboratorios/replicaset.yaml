@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: ada-replicaset
+spec:
+  replicas: 2
+  ## Pods Selector
+  selector: 
+    matchLabels:
+      app: ada-app
+  template:
+    metadata: 
+      labels:
+        app: ada-app
+    spec:
+      containers:
+      - name: ada-container
+        image: nginx
+        ports:
+          - containerPort: 80      

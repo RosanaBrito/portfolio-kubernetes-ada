@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ada-deployment
+  labels:
+    app: ada-app
+  annotations:
+    kubernetes.io/change-cause: "Update image nginx 1.17 to 1.16"
+spec:
+  strategy:
+    type: RollingUpdate # Recreate | RollingUpdate
+    rollingUpdate:
+      maxSurge: 20%
+      maxUnavailable: 20%
+  revisionHistoryLimit: 10
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ada-app
+  template:
+    metadata:
+      labels:
+        app: ada-app
+    spec: 
+      containers: 
+      - name: ada-container
+        image: nginx:1.16.1
+        ports:          
+          - containerPort: 80
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"       
